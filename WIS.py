@@ -10,22 +10,22 @@ def wis(jobs):
     sigma = sorted(jobs, key=lambda x: x[1])    #jobs sorted by finish time
     M = [0] * (n + 1)
 
-    ij = [0] * (n + 1)  # ij is the largest index such that fij < sj
-    for j in range(1, n + 1):
-        sj, _, _ = sigma[j - 1]
-        # find fi < sj
-        lo, hi = 0, j - 2
-        while lo <= hi:
-            mid = (lo + hi) // 2
-            if sigma[mid][1] <= sj:
-                ij[j] = mid + 1
-                lo = mid + 1
-            else:
-                hi = mid - 1
-
     for j in range(1, n + 1):
         sj, fj, vj = sigma[j - 1]
-        M[j] = max(vj + M[ij[j]], M[j - 1]) #bellman
+
+        #find fi < sj
+        l=0
+        h=j-2
+        p=0 #previous
+        while l<=h:
+            m = (l+h)//2
+            if sigma[m][1] <= sj:
+                p=m+1
+                l=m+1
+            else:
+                h=m-1
+
+        M[j] = max(M[j-1], M[p] + vj) #bellman
 
     return M[n] # M[n] = solution
 
