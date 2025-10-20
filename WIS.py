@@ -1,12 +1,12 @@
 import sys
 
-inputy = sys.stdin.read().splitlines()
-k = int(inputy[0])
+inputy = list(map(int, sys.stdin.buffer.read().split()))
+k = inputy[0]
 index = 1
 
-def wis(jobs):
-    n = len(jobs)
-    sigma = sorted(jobs, key=lambda x: x[1])    #jobs sorted by finish time
+def wis(sigma):
+    n = len(sigma)
+    sigma.sort(key=lambda x: x[1])    #jobs sorted by finish time
     M = [0] * (n + 1)
 
     for j in range(1, n + 1):
@@ -29,14 +29,11 @@ def wis(jobs):
     return M[n] 
 
 for _ in range(k):
-    jobs = []
     n = int(inputy[index])   
     index += 1
-    for __ in range(n):
-        s, f, v = inputy[index].split()
-        jobs.append([int(s), int(f), int(v)])
-        index += 1
-    print(wis(jobs))
+    jobs = [tuple(map(int, inputy[index+i*3 : index+i*3+3])) for i in range(n)]
+    index+=(3*n)
+    print(str(wis(jobs)))
     
 
 
