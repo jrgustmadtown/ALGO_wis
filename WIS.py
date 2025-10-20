@@ -25,7 +25,7 @@ def wis(jobs):
 
     for j in range(1, n + 1):
         sj, fj, vj = sigma[j - 1]
-        M[j] = max(vj + M[p[j]], M[j - 1]) #bellman
+        M[j] = max(vj + M[ij[j]], M[j - 1]) #bellman
 
     return M[n] # M[n] = solution
 
