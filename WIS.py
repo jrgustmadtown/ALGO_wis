@@ -6,6 +6,7 @@ k = inputy[0]
 index = 1
 
 def wis(sigma):
+    n = len(sigma)
     sigma.sort(key=lambda x: x[1])    #jobs sorted by finish time
     
     f_ = [0]
@@ -15,8 +16,10 @@ def wis(sigma):
         i = bisect_right(f_, s) - 1
         
         #compute halfs of the bellman sperately
+        bell_l = v + M[i]
+        bell_r = M[-1]
         f_.append(f)
-        M.append(max(M[-1], M[i+v])) # bellman
+        M.append(max(bell_l, bell_r)) # bellman
 
     return M[-1]
 
