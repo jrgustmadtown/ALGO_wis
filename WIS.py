@@ -3,7 +3,6 @@ import sys
 inputy = sys.stdin.read().splitlines()
 k = int(inputy[0])
 index = 1
-outputy = []
 
 def wis(jobs):
     n = len(jobs)
@@ -27,7 +26,7 @@ def wis(jobs):
 
         M[j] = max(M[j-1], M[p] + vj) #bellman
 
-    return M[n] # M[n] = solution
+    return M[n] 
 
 for _ in range(k):
     jobs = []
@@ -37,11 +36,7 @@ for _ in range(k):
         s, f, v = inputy[index].split()
         jobs.append([int(s), int(f), int(v)])
         index += 1
-
-    outputy.append(wis(jobs))
-
-for _ in outputy:
-    print(_)
+    print(wis(jobs))
     
 
 
