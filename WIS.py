@@ -11,7 +11,7 @@ def wis(jobs):
     M = [n]
     M[0] = 0
 
-    for j in range(1, n):
+    for j in range(1, n+1):
         sj, fj, vj = sigma[j]
         rho = sorted(sigma[:j], key=lambda x: x[0]) #jobs before j sorted by start time
 
