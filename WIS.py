@@ -35,6 +35,7 @@ for _ in range(k):
     jobs = []
 
     for __ in range(index):
+        index+=1
         s, f, v = inputy[index].split()
         jobs.append([int(s), int(f), int(v)])
         index+=1
