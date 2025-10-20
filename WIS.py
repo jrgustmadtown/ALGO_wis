@@ -6,7 +6,6 @@ k = inputy[0]
 index = 1
 
 def wis(sigma):
-    n = len(sigma)
     sigma.sort(key=lambda x: x[1])    #jobs sorted by finish time
     
     f_ = [0]
