@@ -1,4 +1,5 @@
 import sys
+from bisect import bisect_right
 
 inputy = list(map(int, sys.stdin.buffer.read().split()))
 k = inputy[0]
@@ -7,26 +8,20 @@ index = 1
 def wis(sigma):
     n = len(sigma)
     sigma.sort(key=lambda x: x[1])    #jobs sorted by finish time
-    M = [0] * (n + 1)
+    
+    f_ = [0]
+    M = [0]
 
-    for j in range(1, n + 1):
-        sj, fj, vj = sigma[j - 1]
+    for s, f, v in jobs:
+        i = bisect_right(f_, s) - 1
+        
+        #compute halfs of the bellman sperately
+        bell_l = v + M[i]
+        bell_r = M[-1]
+        f_.append(f)
+        M.append(max(bell_l, bell_r)) # bellman
 
-        #find fi < sj
-        l=0
-        h=j-2
-        p=0 #previous
-        while l<=h:
-            m = (l+h)//2
-            if sigma[m][1] <= sj:
-                p=m+1
-                l=m+1
-            else:
-                h=m-1
-
-        M[j] = max(M[j-1], M[p] + vj) #bellman
-
-    return M[n] 
+    return M[-1]
 
 for _ in range(k):
     n = int(inputy[index])   
